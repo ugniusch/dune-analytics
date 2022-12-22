@@ -61,9 +61,9 @@ class Dune:
         result = self.client.execute(gql_query, operation_name="FindSessionUser", variable_values={"sub": self.sub})
         return result['users'][0]
 
-    def query(self, query):
+    def query(self, query, dataset_id=4):
         self.refresh_session()
-        new_query = self.upsert_query(query)
+        new_query = self.upsert_query(query, dataset_id)
 
         job_id = self.execute_query(new_query['id'])
         self.wait_for_job(job_id)
